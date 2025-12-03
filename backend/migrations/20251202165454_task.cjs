@@ -11,12 +11,13 @@ exports.up = async function(knex) {
             useNative:true,
             enumName:'status'
         }),
-        table.enu('priority',['ugent','high priority','low priority','critical'],{
+        table.enu('priority',['urgent','high','low','critical'],{
             useNative:true,
             enumName:'priority'
         })
-        table.dateTime('created_at').defaultTo(knex.fn.now())
-        table.dateTime('updated_at').defaultTo(knex.fn.now())
+        table.date('due_date')
+        table.timestamp('created_at').defaultTo(knex.fn.now())
+        table.timestamp('updated_at').defaultTo(knex.fn.now())
     })
   
 };
@@ -26,5 +27,6 @@ exports.up = async function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
+    return knex.schema.dropTable('task')
   
 };

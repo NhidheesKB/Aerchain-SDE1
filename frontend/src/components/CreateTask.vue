@@ -6,7 +6,7 @@
       </h2>
       <form
         class="space-y-6"
-        action="http://localhost:3000/api/create"
+        action="/api/create"
         method="POST"
         @submit.prevent="handleSubmit"
         autocomplete="off"
@@ -22,7 +22,7 @@
             v-if="!['Status', 'Priority'].includes(field)"
             :type="field === 'Due date' ? 'date' : 'text'"
             :id="field.toLowerCase()"
-            :name="field=='due date'?'due_date':field.toLowerCase()"
+            :name="field=='Due date'?'due_date':field.toLowerCase()"
             :placeholder="`Enter the Task ${field}`"
             required
             class="w-full px-4 py-3 rounded-lg bg-gray-100 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700 shadow-sm"
