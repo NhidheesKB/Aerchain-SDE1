@@ -6,9 +6,9 @@
       </h1>
       <div>
         <RouterLink
-          to="/available-tasks"
+          :to="$route.path=='/available-tasks'?'/':'/available-tasks'"
           class="text-gray-700 font-medium hover:text-blue-600 transition"
-          >Available Tasks</RouterLink
+          >{{$route.path=='/available-tasks'?"Create Task":"Available Tasks"}}</RouterLink
         >
       </div>
     </nav>

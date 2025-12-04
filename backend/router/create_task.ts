@@ -1,12 +1,14 @@
 import { Router } from "express";
+import { TaskService } from "../service/task_service.js";
+import { taskValidator } from "../validator/validator.js";
 const router = Router();
-export default router.post("/create", async (req, res) => {
-    try {
-        const {title,description,status,priority,due_date}=req.body
-        console.log("body",req.body)
-        
-    } catch (error) {
-        console.error("Create task Error",error)
-        
-    }
+const taskservice = new TaskService();
+export default router.post("/create",taskValidator(), async (req, res) => {
+  try {
+    const task = req.body;
+    await taskservice.createTask(task);
+    res.status(200).send("Task Created Sucessfully");
+  } catch (error) {
+    console.error("Create task Error", error);
+  }
 });

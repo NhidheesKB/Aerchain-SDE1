@@ -17,6 +17,6 @@
 
     "sourceMap": true
   },
-  "include": ["src", "migrations/20251202165454_task.cjs", "router", "router"],
+  // "include": ["src", "migrations/20251202165454_task.cjs", "router", "router"],
   "exclude": ["node_modules"]
 }
