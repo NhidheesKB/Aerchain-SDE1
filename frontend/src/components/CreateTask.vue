@@ -7,7 +7,7 @@
         </h2>
         <button
           type="button"
-          @click="microPhoneHandler"
+          @click="toggleMic"
           class="w-14 h-14 flex items-center justify-center 
           bg-blue-600 text-white rounded-full shadow-lg
           hover:bg-blue-700 active:scale-95 transition-all"
@@ -65,7 +65,8 @@
 
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { apiRequestHandler, microPhoneHandler, options } from "../composable/helper";
+import { apiRequestHandler,  options } from "../composable/helper";
+import { toggleMic } from "../composable/micHandler";
 import { useRouter } from "vue-router";
 const route = useRouter()
 const formFields = ref([

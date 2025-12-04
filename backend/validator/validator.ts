@@ -17,3 +17,7 @@ export const updateStatusValidator = () => {
 export const deleteTaskValidator=()=>{
     return validate([body("id").isNumeric()])
 }
+
+export const generateTaskValidator=()=>{
+  return validate([body('content').isString()])
+}

@@ -1,3 +1,4 @@
+
 export const options: Record<string, string[]> = {
   priority: ["urgent", "high", "low", "critical"],
   status: ["To Do", "In Progress", "Done"],
@@ -19,8 +20,4 @@ export async function apiRequestHandler(action:RequestInfo | URL, method:string,
     body: JSON.stringify(task),
   });
   return response;
-}
-
-export async function microPhoneHandler(){
-    
 }
