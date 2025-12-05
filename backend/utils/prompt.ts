@@ -16,7 +16,7 @@ Rules:
 - If no due date is found, return null.
 - If no priority is found, return "medium".
 - Status must be "To Do" unless explicitly mentioned.
-
+- Give me the JSON Format becaue i simply use JSON.prase("Your Response")
 User Input:
 ${content}`;
 }

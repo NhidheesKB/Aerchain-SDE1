@@ -1,6 +1,6 @@
 import {  createRouter, createWebHistory } from 'vue-router'
-import CreateTask from './components/CreateTask.vue'
-import AvailableTasks from './components/AvailableTasks.vue'
+import CreateTask from './pages/CreateTask.vue'
+import AvailableTasks from './pages/AvailableTasks.vue'
 
 const routes = [
   { path: '/', component: CreateTask },
