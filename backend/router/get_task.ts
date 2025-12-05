@@ -8,6 +8,6 @@ export default router.get("/task", async (req, res) => {
     return res.status(200).json({ data });
   } catch (error) {
     console.log("getdataError", error);
-    return res.status(500).send("Internal Server Error");
+    return res.status(400).send("Internal Server Error");
   }
 });

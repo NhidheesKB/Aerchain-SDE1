@@ -7,29 +7,28 @@ let fullSpeech: string = "";
 export const toggleMic = () => {
   micStatus.value = !micStatus.value;
 };
-export const fields:Record<string,string|Date>=reactive({
-  title:'',
-  description:'',
-  due_date:'',
-  status:'To Do',
-  priority:''
-
-})
-export const formFields = Object.keys(fields)
+export const fields: Record<string, string | Date> = reactive({
+  title: "",
+  description: "",
+  due_date: "",
+  status: "To Do",
+  priority: "",
+});
+export const formFields = Object.keys(fields);
 
 const generateTask = async (content: string) => {
   try {
-    const body={content}
-    const response=await apiRequestHandler("generate","POST",body)
-    if(!response.ok) return console.log("Speech Send is Failed")
-    const {field}=await response.json()
-    const task=JSON.parse(field)
-    formFields.forEach((field)=>{
-      fields[field]=task[field]
-    })
-    console.log("tasks",task)
+    const body = { content };
+    const response = await apiRequestHandler("generate", "POST", body);
+    if (!response.ok) return console.log("Speech Send is Failed");
+    const { field } = await response.json();
+    const task = JSON.parse(field);
+    formFields.forEach((field) => {
+      fields[field] = task[field];
+    });
+    console.log("tasks", task);
   } catch (error) {
-    alert("Something Went Wrong Try Again")
+    alert("Something Went Wrong Try Again");
     console.log("Send Speech Error", error);
   }
 };
@@ -45,23 +44,23 @@ const recorder = async () => {
   recognition.interimResults = false;
 
   recognition.onerror = (e: SpeechRecognitionErrorEvent) => {
-    micStatus.value=false
-    alert(`Microphone is ${e.error}`)
+    micStatus.value = false;
+    alert(`Microphone is ${e.error}`);
     console.log("Speech recognition error", e.error);
   };
 
   recognition.onresult = (event) => {
     result.push(event.results);
   };
-  recognition.onend = async() => {
+  recognition.onend = async () => {
     fullSpeech = "";
     const finalResult = result.at(-1) as SpeechRecognitionResultList;
-    if(!finalResult) return
+    if (!finalResult) return;
     for (const result of finalResult) {
-      fullSpeech += result.item(0).transcript
+      fullSpeech += result.item(0).transcript;
     }
-    console.log("Before Send",fullSpeech)
-    await generateTask(fullSpeech)
+    console.log("Before Send", fullSpeech);
+    await generateTask(fullSpeech);
     micStatus.value = false;
   };
 
@@ -70,7 +69,7 @@ const recorder = async () => {
 
 watch(micStatus, async (isMicOn) => {
   if (isMicOn) {
-    console.log("Mic Status",isMicOn)
+    console.log("Mic Status", isMicOn);
     return (result.length = 0), await recorder();
   }
   recognition.stop();
