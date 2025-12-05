@@ -5,18 +5,18 @@
         <h2 class="text-2xl md:text-3xl font-bold text-blue-600 sm:ml-40">
           Add Task Details
         </h2>
-        <button
-          type="button"
-          @click="toggleMic"
-          class="w-14 h-14 flex items-center justify-center 
-          bg-blue-600 text-white rounded-full shadow-lg
-          hover:bg-blue-700 active:scale-95 transition-all"
-        >
-          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zM11 19h2v3h-2v-3z" />
-          </svg>
-        </button>
+        <div class="relative flex items-center justify-center" @click="toggleMic">
+          <div v-if="micStatus" class="absolute w-15 h-15 rounded-full bg-red-400 opacity-30 animate-ping"></div>
+
+          <button
+            class="relative z-10 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition duration-300"
+            :class="micStatus ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-500 hover:bg-gray-400'">
+            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zM11 19h2v3h-2v-3z" />
+            </svg>
+          </button>
+        </div>
       </div>
       <form class="space-y-6" @submit.prevent="handleSubmit" autocomplete="off">
         <div v-for="(field, index) in formFields" :key="index" class="relative">
@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { apiRequestHandler,  options } from "../composable/helper";
-import { toggleMic } from "../composable/micHandler";
+import { micStatus, toggleMic } from "../composable/micHandler";
 import { useRouter } from "vue-router";
 const route = useRouter()
 const formFields = ref([

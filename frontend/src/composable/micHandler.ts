@@ -1,8 +1,8 @@
 import { ref, watch } from "vue";
 import { apiRequestHandler } from "./helper";
-const micStatus = ref(false);
-const result: any[] = [];
-let recognition: any;
+export const micStatus = ref(false);
+const result: SpeechRecognitionResultList[] = [];
+let recognition: SpeechRecognition;
 let fullSpeech: string = "";
 export const toggleMic = () => {
   micStatus.value = !micStatus.value;
@@ -28,19 +28,22 @@ const recorder = async () => {
   recognition.lang = "en-IN";
   recognition.continuous = true;
   recognition.interimResults = false;
-  recognition.onerror = (e: any) => {
-    console.log("Speech recognition error", e);
+
+  recognition.onerror = (e: SpeechRecognitionErrorEvent) => {
+    micStatus.value=false
+    alert(`Microphone is ${e.error}`)
+    console.log("Speech recognition error", e.error);
   };
 
-  recognition.onresult = (event: any) => {
+  recognition.onresult = (event) => {
     result.push(event.results);
   };
-
   recognition.onend = async() => {
     fullSpeech = "";
-    const finalResult: any[] = result.at(-1);
+    const finalResult = result.at(-1) as SpeechRecognitionResultList;
+    if(!finalResult) return
     for (const result of finalResult) {
-      fullSpeech += result[0].transcript;
+      fullSpeech += result.item(0).transcript
     }
     await generateTask(fullSpeech)
     console.log("fullspeech", fullSpeech);
