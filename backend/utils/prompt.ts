@@ -17,6 +17,7 @@ Rules:
 - If no priority is found, return "medium".
 - Status must be "To Do" unless explicitly mentioned.
 - Give me the JSON Format becaue i simply use JSON.prase("Your Response")
+- Don't Give like json
 User Input:
 ${content}`;
 }

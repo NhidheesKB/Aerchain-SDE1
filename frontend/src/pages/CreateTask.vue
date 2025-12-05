@@ -50,6 +50,7 @@ import { apiRequestHandler, options } from "../composable/helper";
 import { fields, formFields } from "../composable/micHandler";
 import { useRouter } from "vue-router";
 import FormHeader from "../components/FormHeader.vue";
+import Spinner from "../components/Spinner.vue";
 const route = useRouter();
 async function handleSubmit() {
   try {

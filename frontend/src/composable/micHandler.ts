@@ -15,6 +15,7 @@ export const fields: Record<string, string | Date> = reactive({
   priority: "",
 });
 export const formFields = Object.keys(fields);
+export const isProcessing = ref(false);   
 
 const generateTask = async (content: string) => {
   try {
@@ -29,6 +30,7 @@ const generateTask = async (content: string) => {
     console.log("tasks", task);
   } catch (error) {
     alert("Something Went Wrong Try Again");
+    isProcessing.value=false
     console.log("Send Speech Error", error);
   }
 };
@@ -59,8 +61,10 @@ const recorder = async () => {
     for (const result of finalResult) {
       fullSpeech += result.item(0).transcript;
     }
+    isProcessing.value=true
     console.log("Before Send", fullSpeech);
     await generateTask(fullSpeech);
+    isProcessing.value=false
     micStatus.value = false;
   };
 
