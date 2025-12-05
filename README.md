@@ -1,137 +1,196 @@
-# Aerchain-SDE1
+# Aerchain AI-Powered Task Manager
 
-## Project Overview
+![Language](https://img.shields.io/badge/language-TypeScript-blue.svg)
+![Frontend](https://img.shields.io/badge/frontend-Vue.js-42b883.svg)
+![Backend](https://img.shields.io/badge/backend-Node.js-green.svg)
+![Build Tool](https://img.shields.io/badge/build-Vite-purple.svg)
+![Database](https://img.shields.io/badge/database-PostgreSQL-blue.svg)
+![AI](https://img.shields.io/badge/AI-OpenRouter-orange.svg)
+![CSS Framework](https://img.shields.io/badge/css-TailwindCSS-06B6D4.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-This repository contains the backend implementation for a task management application, built using TypeScript, Express.js, and Node.js. It provides functionalities for creating, retrieving, updating, and deleting tasks, as well as managing their statuses.
+A full-stack application designed to streamline task management with the power of artificial intelligence and an intuitive user interface. This project provides a dynamic and interactive experience for users to efficiently create, view, update, and delete tasks, with the unique ability to generate new tasks using AI prompts and interact via speech input. The frontend, built with Vue 3, ensures a responsive and modern UI, while the robust Node.js backend handles data persistence with PostgreSQL and integrates with the OpenRouter AI platform for intelligent task generation.
 
-## Key Features & Benefits
+## ✨ Features
 
-*   **Task Management:**  Allows users to create, read, update, and delete tasks.
-*   **Status Updates:** Enables users to modify the status of existing tasks (e.g., pending, in progress, completed).
-*   **API Integration:** Utilizes OpenRouter for AI-powered task generation.
-*   **Database Persistence:** Employs PostgreSQL for robust and reliable data storage.
-*   **Input Validation:** Implements middleware to validate user input, ensuring data integrity.
+*   **Intuitive Task Management:** Comprehensive CRUD (Create, Read, Update, Delete) operations for tasks.
+*   **AI-Powered Task Generation:** Generate new tasks automatically based on user-provided prompts, leveraging the OpenRouter AI.
+*   **Speech-to-Text Input:** Create tasks hands-free using integrated speech recognition functionality.
+*   **Drag-and-Drop Interface:** Easily reorder and organize tasks within the user interface.
+*   **Responsive & Modern UI:** Built with Vue 3 and Tailwind CSS for a seamless experience across devices.
+*   **Robust RESTful API:** A well-structured backend API to manage task data securely and efficiently.
+*   **PostgreSQL Database:** Reliable and scalable data storage for all your task-related information.
+*   **Data Validation:** Secure API endpoints with robust schema validation using Zod and Express-Validator.
 
-## Prerequisites & Dependencies
+## 📚 Tech Stack
+
+The Aerchain AI-Powered Task Manager is a full-stack application composed of two main services: a frontend and a backend.
+
+**Frontend:**
+
+*   **Framework:** Vue 3 (Composition API)
+*   **Language:** TypeScript
+*   **Build Tool:** Vite
+*   **Styling:** Tailwind CSS
+*   **Routing:** Vue Router
+*   **UI Components:** Vue Draggable Next
+*   **Interaction:** Web Speech API (for speech recognition)
+
+**Backend:**
+
+*   **Runtime:** Node.js
+*   **Language:** TypeScript
+*   **Web Framework:** Express.js
+*   **Database ORM/Query Builder:** Knex.js
+*   **Database:** PostgreSQL
+*   **AI Integration:** OpenRouter SDK
+*   **Validation:** Zod, Express-Validator
+*   **Environment Variables:** Dotenv
+
+## 🚀 Installation
+
+The project is organized as a monorepo with separate `frontend` and `backend` directories. Follow the steps below to set up and run the application.
+
+### Prerequisites
 
 Before you begin, ensure you have the following installed:
 
-*   **Node.js:**  (version >= 18) -  [https://nodejs.org/](https://nodejs.org/)
-*   **npm** or **yarn:** (comes with Node.js)
-*   **PostgreSQL:** A relational database for storing task data. [https://www.postgresql.org/](https://www.postgresql.org/)
-*   **dotenv:** To manage environment variables.
+*   [Node.js](https://nodejs.org/en/) (v18 or higher recommended)
+*   [npm](https://www.npmjs.com/) (comes with Node.js)
+*   [PostgreSQL](https://www.postgresql.org/download/) installed and running
 
-## Installation & Setup Instructions
+### Backend Setup
 
-Follow these steps to install and set up the project:
-
-1.  **Clone the repository:**
-
+1.  **Navigate to the backend directory:**
     ```bash
-    git clone https://github.com/NhidheesKB/Aerchain-SDE1.git
     cd Aerchain-SDE1/backend
     ```
-
 2.  **Install dependencies:**
-
     ```bash
-    npm install  # or yarn install
+    npm install
     ```
+3.  **Configure Environment Variables:**
+    Create a `.env` file in the `Aerchain-SDE1/backend` directory with the following content. Replace placeholder values with your actual credentials and API keys:
 
-3.  **Set up environment variables:**
-
-    Create a `.env` file in the `backend/` directory based on the example below, replacing the placeholders with your actual values.
-
-    ```
-    DB_HOST=your_db_host
-    DB_PORT=your_db_port
-    DB_PASSWORD=your_db_password
-    DB_USER=your_db_user
-    DB_DATABASE=your_db_database
+    ```env
+    DB_CONNECTION=pg
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USER=your_pg_user
+    DB_PASSWORD=your_pg_password
+    DB_DATABASE=aerchain_tasks
     OPENROUTER_API_KEY=your_openrouter_api_key
     ```
-    **Important:**  Ensure you have the necessary credentials for your PostgreSQL database and an OpenRouter API key.
+    *   `DB_USER`, `DB_PASSWORD`, `DB_DATABASE`: Your PostgreSQL username, password, and the database name you wish to use (e.g., `aerchain_tasks`).
+    *   `OPENROUTER_API_KEY`: Obtain an API key from the [OpenRouter platform](https://openrouter.ai/) and input it here.
 
-4.  **Configure Database SSL (Optional):**
-    If your PostgreSQL instance requires SSL, ensure to have the CA certificate in the `cred/ca.pem` and that the path in `backend/knexfile.ts` is correct.
-
-5.  **Run Migrations:**
-
+4.  **Run Database Migrations:**
+    This will create the necessary tables in your PostgreSQL database.
     ```bash
-    npx knex migrate:latest --knexfile knexfile.ts
+    npx knex migrate:latest
     ```
-    This will create the necessary database tables.
-
-6.  **Build the project:**
-
+5.  **Seed the Database (Optional):**
+    If you want to populate your database with some initial data, run the seeder:
     ```bash
-    npm run build
+    npx knex seed:run
     ```
-
-7.  **Start the server:**
-
+6.  **Start the Backend Server:**
     ```bash
-    npm start  # or node build/server.js
+    npm run dev
     ```
+    The backend server will typically run on `http://localhost:3000`.
 
-    Alternatively, for development with live reloading:
+### Frontend Setup
 
+1.  **Navigate to the frontend directory:**
     ```bash
-    npm run dev # or tsx watch ./server.ts
+    cd Aerchain-SDE1/frontend
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Start the Frontend Development Server:**
+    ```bash
+    npm run dev
+    ```
+    The frontend application will usually open automatically in your browser at `http://localhost:5173` (or a similar port assigned by Vite).
+
+## ▶️ Usage
+
+Once both the frontend and backend servers are up and running:
+
+1.  **Access the Application:** Open your web browser and navigate to the frontend URL (e.g., `http://localhost:5173`).
+2.  **Create Tasks:**
+    *   Use the "Create Task" page to manually input task details.
+    *   Leverage the speech input feature (if your browser supports Web Speech API and mic access is granted) to dictate new tasks.
+3.  **AI Task Generation:** On the "Create Task" page, utilize the AI generation option to automatically suggest and create tasks based on a simple prompt.
+4.  **Manage Tasks:** View all your tasks, easily edit their descriptions or titles, update their completion status, or delete them. The drag-and-drop functionality allows for intuitive reordering of tasks within the interface.
+
+### Example API Endpoints (Backend Interaction)
+
+You can interact directly with the backend API using tools like cURL or Postman:
+
+*   **GET all tasks:**
+    ```bash
+    GET http://localhost:3000/api/tasks
+    ```
+*   **CREATE a new task:**
+    ```bash
+    POST http://localhost:3000/api/tasks
+    Content-Type: application/json
+
+    {
+        "title": "Plan marketing campaign",
+        "description": "Outline strategy for Q4, research target audience.",
+        "status": "pending"
+    }
+    ```
+*   **UPDATE an existing task:**
+    ```bash
+    PUT http://localhost:3000/api/tasks/:id
+    Content-Type: application/json
+
+    {
+        "title": "Finalize Q4 Marketing Plan",
+        "status": "in_progress"
+    }
+    ```
+*   **UPDATE task status:**
+    ```bash
+    PATCH http://localhost:3000/api/tasks/:id/status
+    Content-Type: application/json
+
+    {
+        "status": "completed"
+    }
+    ```
+*   **DELETE a task:**
+    ```bash
+    DELETE http://localhost:3000/api/tasks/:id
+    ```
+*   **GENERATE a task using AI:**
+    ```bash
+    POST http://localhost:3000/api/generate-task
+    Content-Type: application/json
+
+    {
+        "prompt": "a simple task related to cooking dinner"
+    }
     ```
 
-    The server will start running on the configured port (usually 3000).
+## 🤝 Contributing
 
-## Usage Examples & API Documentation
-
-The backend provides the following API endpoints:
-
-*   **`POST /tasks`**: Creates a new task.  Requires request body with task details.
-    *   Example: `POST /tasks -d '{"title": "My Task", "description": "Task description"}`
-*   **`GET /tasks/:id`**: Retrieves a task by ID.
-    *   Example: `GET /tasks/123`
-*   **`PUT /tasks/:id`**: Updates an existing task. Requires request body with updated task details.
-    *   Example: `PUT /tasks/123 -d '{"description": "Updated description"}`
-*   **`DELETE /tasks/:id`**: Deletes a task by ID.
-    *   Example: `DELETE /tasks/123`
-*   **`PATCH /tasks/:id/status`**: Updates the status of a task. Requires a request body with the new status.
-    *   Example: `PATCH /tasks/123/status -d '{"status": "completed"}`
-*   **`POST /tasks/generate`**: Generates a task using OpenRouter.
-
-**Request and Response Formats:**
-
-All API endpoints expect and return JSON data.
-
-## Configuration Options
-
-The following environment variables can be configured:
-
-| Variable            | Description                                                                                                     | Default Value |
-| ------------------- | --------------------------------------------------------------------------------------------------------------- | ------------- |
-| `DB_HOST`           | The hostname or IP address of the PostgreSQL server.                                                          | `localhost`   |
-| `DB_PORT`           | The port number of the PostgreSQL server.                                                                      | `5432`        |
-| `DB_PASSWORD`       | The password for the PostgreSQL user.                                                                         |               |
-| `DB_USER`           | The username for connecting to the PostgreSQL database.                                                         |               |
-| `DB_DATABASE`       | The name of the PostgreSQL database to use.                                                                     | `tasks`       |
-| `OPENROUTER_API_KEY`| The API key for accessing the OpenRouter service.                                                              |               |
-
-## Contributing Guidelines
-
-We welcome contributions to this project! To contribute, please follow these steps:
+We welcome contributions to the Aerchain AI-Powered Task Manager! If you have suggestions for improvements, new features, or bug fixes, please feel free to:
 
 1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Make your changes and commit them with descriptive commit messages.
-4.  Submit a pull request to the `main` branch.
+2.  Create a new branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
 
-Please adhere to the project's coding style and conventions. Ensure that your code includes appropriate tests.
+Please ensure your code adheres to the existing style and conventions.
 
-## License Information
+## 📝 License
 
-This project has no specified license. All rights are reserved unless otherwise stated.
-
-## Acknowledgments
-
-*   [Express.js](https://expressjs.com/) - For providing a robust and flexible web application framework.
-*   [Knex.js](http://knexjs.org/) -  For providing a powerful SQL query builder.
-*   [OpenRouter](https://openrouter.ai/) - For AI Task Generation.
+This project is distributed under the MIT License. See the `LICENSE` file (if available, consider adding one to your project root) for more information.
