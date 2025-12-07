@@ -178,19 +178,3 @@ You can interact directly with the backend API using tools like cURL or Postman:
         "prompt": "a simple task related to cooking dinner"
     }
     ```
-
-## 🤝 Contributing
-
-We welcome contributions to the Aerchain AI-Powered Task Manager! If you have suggestions for improvements, new features, or bug fixes, please feel free to:
-
-1.  Fork the repository.
-2.  Create a new branch (`git checkout -b feature/AmazingFeature`).
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4.  Push to the branch (`git push origin feature/AmazingFeature`).
-5.  Open a Pull Request.
-
-Please ensure your code adheres to the existing style and conventions.
-
-## 📝 License
-
-This project is distributed under the MIT License. See the `LICENSE` file (if available, consider adding one to your project root) for more information.
