@@ -20,7 +20,7 @@ A full-stack application designed to streamline task management with the power o
 *   **Responsive & Modern UI:** Built with Vue 3 and Tailwind CSS for a seamless experience across devices.
 *   **Robust RESTful API:** A well-structured backend API to manage task data securely and efficiently.
 *   **PostgreSQL Database:** Reliable and scalable data storage for all your task-related information.
-*   **Data Validation:** Secure API endpoints with robust schema validation using Zod and Express-Validator.
+*   **Data Validation:** Secure API endpoints with robust schema validation using Express-Validator.
 
 ## 📚 Tech Stack
 
@@ -44,7 +44,7 @@ The Aerchain AI-Powered Task Manager is a full-stack application composed of two
 *   **Database ORM/Query Builder:** Knex.js
 *   **Database:** PostgreSQL
 *   **AI Integration:** OpenRouter SDK
-*   **Validation:** Zod, Express-Validator
+*   **Validation:** Express-Validator
 *   **Environment Variables:** Dotenv
 
 ## 🚀 Installation
